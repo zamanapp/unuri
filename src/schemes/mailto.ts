@@ -1,6 +1,4 @@
-/* eslint-disable unicorn/prefer-node-protocol */
-/* eslint-disable node/no-deprecated-api */
-import punycode from 'punycode'
+import punycode from 'punycode.js'
 import { pctDecChars, pctEncChar, unescapeComponent } from '../uri'
 import type { URIComponents, URIOptions, URISchemeHandler } from '../uri'
 import { toArray, toUpperCase } from '../util'

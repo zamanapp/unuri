@@ -34,9 +34,7 @@
  * or implied, of Gary Court.
  */
 
-/* eslint-disable unicorn/prefer-node-protocol */
-/* eslint-disable node/no-deprecated-api */
-import punycode from 'punycode'
+import punycode from 'punycode.js'
 import URI_PROTOCOL from './regexps-uri'
 import IRI_PROTOCOL from './regexps-iri'
 import { assign, toUpperCase, typeOf } from './util'
