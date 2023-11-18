@@ -8,6 +8,9 @@
 
 An [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986) compliant, scheme extendable URI parsing, validating and resolving library for both node and the browser.
 
+> This project is a based of [uri-js](https://github.com/garycourt/uri-js) and aims to modernize it and extend it with new schemas/features.
+> The project is meant to be used by [Zamical]() to parse and validate URIs in compliance with the ICalendar specifications in [RFC 5545](https://datatracker.ietf.org/doc/html/rfc5545) and [RFC 7986](https://datatracker.ietf.org/doc/html/rfc7986).
+
 ## Features
 
 - Compliant with the following RFCs:
