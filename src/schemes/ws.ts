@@ -15,7 +15,7 @@ export const handler: URISchemeHandler = {
 
   domainHost: true,
 
-  parse(components: URIComponents, options: URIOptions): WSComponents {
+  parse(components: URIComponents, _: URIOptions): WSComponents {
     const wsComponents = components as WSComponents
 
     // indicate if the secure flag is set
@@ -29,7 +29,7 @@ export const handler: URISchemeHandler = {
     return wsComponents
   },
 
-  serialize(wsComponents: WSComponents, options: URIOptions): URIComponents {
+  serialize(wsComponents: WSComponents, _: URIOptions): URIComponents {
     // normalize the default port
     if (wsComponents.port === (isSecure(wsComponents) ? 443 : 80) || wsComponents.port === '')
       wsComponents.port = undefined

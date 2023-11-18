@@ -377,7 +377,7 @@ export function removeDotSegments(input: string): string {
       input = input.replace(RDS3, '/')
       output.pop()
     }
-    else if (input === '.' || input === '..') {
+    else if (input.match(RDS4)) {
       input = ''
     }
     else {

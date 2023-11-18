@@ -4,12 +4,12 @@ import { merge, subExp } from './util'
 export function buildExps(isIRI: boolean): URIRegExps {
   const
     ALPHA$$ = '[A-Za-z]'
-  const CR$ = '[\\x0D]'
+  // const CR$ = '[\\x0D]'
   const DIGIT$$ = '[0-9]'
-  const DQUOTE$$ = '[\\x22]'
+  // const DQUOTE$$ = '[\\x22]'
   const HEXDIG$$ = merge(DIGIT$$, '[A-Fa-f]') // case-insensitive
-  const LF$$ = '[\\x0A]'
-  const SP$$ = '[\\x20]'
+  // const LF$$ = '[\\x0A]'
+  // const SP$$ = '[\\x20]'
   const PCT_ENCODED$ = subExp(`${subExp(`%[EFef]${HEXDIG$$}%${HEXDIG$$}${HEXDIG$$}%${HEXDIG$$}${HEXDIG$$}`)}|${subExp(`%[89A-Fa-f]${HEXDIG$$}%${HEXDIG$$}${HEXDIG$$}`)}|${subExp(`%${HEXDIG$$}${HEXDIG$$}`)}`) // expanded
   const GEN_DELIMS$$ = '[\\:\\/\\?\\#\\[\\]\\@]'
   const SUB_DELIMS$$ = '[\\!\\$\\&\\\'\\(\\)\\*\\+\\,\\;\\=]'
@@ -17,9 +17,9 @@ export function buildExps(isIRI: boolean): URIRegExps {
   const UCSCHAR$$ = isIRI ? '[\\xA0-\\u200D\\u2010-\\u2029\\u202F-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]' : '[]' // subset, excludes bidi control characters
   const IPRIVATE$$ = isIRI ? '[\\uE000-\\uF8FF]' : '[]' // subset
   const UNRESERVED$$ = merge(ALPHA$$, DIGIT$$, '[\\-\\.\\_\\~]', UCSCHAR$$)
-  const SCHEME$ = subExp(`${ALPHA$$ + merge(ALPHA$$, DIGIT$$, '[\\+\\-\\.]')}*`)
-  const USERINFO$ = subExp(`${subExp(`${PCT_ENCODED$}|${merge(UNRESERVED$$, SUB_DELIMS$$, '[\\:]')}`)}*`)
-  const DEC_OCTET$ = subExp(`${subExp('25[0-5]')}|${subExp(`2[0-4]${DIGIT$$}`)}|${subExp(`1${DIGIT$$}${DIGIT$$}`)}|${subExp(`[1-9]${DIGIT$$}`)}|${DIGIT$$}`)
+  // const SCHEME$ = subExp(`${ALPHA$$ + merge(ALPHA$$, DIGIT$$, '[\\+\\-\\.]')}*`)
+  // const USERINFO$ = subExp(`${subExp(`${PCT_ENCODED$}|${merge(UNRESERVED$$, SUB_DELIMS$$, '[\\:]')}`)}*`)
+  // const DEC_OCTET$ = subExp(`${subExp('25[0-5]')}|${subExp(`2[0-4]${DIGIT$$}`)}|${subExp(`1${DIGIT$$}${DIGIT$$}`)}|${subExp(`[1-9]${DIGIT$$}`)}|${DIGIT$$}`)
   const DEC_OCTET_RELAXED$ = subExp(`${subExp('25[0-5]')}|${subExp(`2[0-4]${DIGIT$$}`)}|${subExp(`1${DIGIT$$}${DIGIT$$}`)}|${subExp(`0?[1-9]${DIGIT$$}`)}|0?0?${DIGIT$$}`) // relaxed parsing rules
   const IPV4ADDRESS$ = subExp(`${DEC_OCTET_RELAXED$}\\.${DEC_OCTET_RELAXED$}\\.${DEC_OCTET_RELAXED$}\\.${DEC_OCTET_RELAXED$}`)
   const H16$ = subExp(`${HEXDIG$$}{1,4}`)
@@ -35,38 +35,38 @@ export function buildExps(isIRI: boolean): URIRegExps {
   const IPV6ADDRESS9$ = subExp(`${subExp(`${subExp(`${H16$}\\:`)}{0,6}${H16$}`)}?\\:\\:`) // [ *6( h16 ":" ) h16 ] "::"
   const IPV6ADDRESS$ = subExp([IPV6ADDRESS1$, IPV6ADDRESS2$, IPV6ADDRESS3$, IPV6ADDRESS4$, IPV6ADDRESS5$, IPV6ADDRESS6$, IPV6ADDRESS7$, IPV6ADDRESS8$, IPV6ADDRESS9$].join('|'))
   const ZONEID$ = subExp(`${subExp(`${UNRESERVED$$}|${PCT_ENCODED$}`)}+`) // RFC 6874
-  const IPV6ADDRZ$ = subExp(`${IPV6ADDRESS$}\\%25${ZONEID$}`) // RFC 6874
-  const IPV6ADDRZ_RELAXED$ = subExp(IPV6ADDRESS$ + subExp(`\\%25|\\%(?!${HEXDIG$$}{2})`) + ZONEID$) // RFC 6874, with relaxed parsing rules
-  const IPVFUTURE$ = subExp(`[vV]${HEXDIG$$}+\\.${merge(UNRESERVED$$, SUB_DELIMS$$, '[\\:]')}+`)
-  const IP_LITERAL$ = subExp(`\\[${subExp(`${IPV6ADDRZ_RELAXED$}|${IPV6ADDRESS$}|${IPVFUTURE$}`)}\\]`) // RFC 6874
-  const REG_NAME$ = subExp(`${subExp(`${PCT_ENCODED$}|${merge(UNRESERVED$$, SUB_DELIMS$$)}`)}*`)
-  const HOST$ = subExp(`${IP_LITERAL$}|${IPV4ADDRESS$}(?!${REG_NAME$})` + `|${REG_NAME$}`)
-  const PORT$ = subExp(`${DIGIT$$}*`)
-  const AUTHORITY$ = subExp(`${subExp(`${USERINFO$}@`)}?${HOST$}${subExp(`\\:${PORT$}`)}?`)
-  const PCHAR$ = subExp(`${PCT_ENCODED$}|${merge(UNRESERVED$$, SUB_DELIMS$$, '[\\:\\@]')}`)
-  const SEGMENT$ = subExp(`${PCHAR$}*`)
-  const SEGMENT_NZ$ = subExp(`${PCHAR$}+`)
-  const SEGMENT_NZ_NC$ = subExp(`${subExp(`${PCT_ENCODED$}|${merge(UNRESERVED$$, SUB_DELIMS$$, '[\\@]')}`)}+`)
-  const PATH_ABEMPTY$ = subExp(`${subExp(`\\/${SEGMENT$}`)}*`)
-  const PATH_ABSOLUTE$ = subExp(`\\/${subExp(SEGMENT_NZ$ + PATH_ABEMPTY$)}?`) // simplified
-  const PATH_NOSCHEME$ = subExp(SEGMENT_NZ_NC$ + PATH_ABEMPTY$) // simplified
-  const PATH_ROOTLESS$ = subExp(SEGMENT_NZ$ + PATH_ABEMPTY$) // simplified
-  const PATH_EMPTY$ = `(?!${PCHAR$})`
-  const PATH$ = subExp(`${PATH_ABEMPTY$}|${PATH_ABSOLUTE$}|${PATH_NOSCHEME$}|${PATH_ROOTLESS$}|${PATH_EMPTY$}`)
-  const QUERY$ = subExp(`${subExp(`${PCHAR$}|${merge('[\\/\\?]', IPRIVATE$$)}`)}*`)
-  const FRAGMENT$ = subExp(`${subExp(`${PCHAR$}|[\\/\\?]`)}*`)
-  const HIER_PART$ = subExp(`${subExp(`\\/\\/${AUTHORITY$}${PATH_ABEMPTY$}`)}|${PATH_ABSOLUTE$}|${PATH_ROOTLESS$}|${PATH_EMPTY$}`)
-  const URI$ = subExp(`${SCHEME$}\\:${HIER_PART$}${subExp(`\\?${QUERY$}`)}?${subExp(`\\#${FRAGMENT$}`)}?`)
-  const RELATIVE_PART$ = subExp(`${subExp(`\\/\\/${AUTHORITY$}${PATH_ABEMPTY$}`)}|${PATH_ABSOLUTE$}|${PATH_NOSCHEME$}|${PATH_EMPTY$}`)
-  const RELATIVE$ = subExp(`${RELATIVE_PART$ + subExp(`\\?${QUERY$}`)}?${subExp(`\\#${FRAGMENT$}`)}?`)
-  const URI_REFERENCE$ = subExp(`${URI$}|${RELATIVE$}`)
-  const ABSOLUTE_URI$ = subExp(`${SCHEME$}\\:${HIER_PART$}${subExp(`\\?${QUERY$}`)}?`)
+  // const IPV6ADDRZ$ = subExp(`${IPV6ADDRESS$}\\%25${ZONEID$}`) // RFC 6874
+  // const IPV6ADDRZ_RELAXED$ = subExp(IPV6ADDRESS$ + subExp(`\\%25|\\%(?!${HEXDIG$$}{2})`) + ZONEID$) // RFC 6874, with relaxed parsing rules
+  // const IPVFUTURE$ = subExp(`[vV]${HEXDIG$$}+\\.${merge(UNRESERVED$$, SUB_DELIMS$$, '[\\:]')}+`)
+  // const IP_LITERAL$ = subExp(`\\[${subExp(`${IPV6ADDRZ_RELAXED$}|${IPV6ADDRESS$}|${IPVFUTURE$}`)}\\]`) // RFC 6874
+  // const REG_NAME$ = subExp(`${subExp(`${PCT_ENCODED$}|${merge(UNRESERVED$$, SUB_DELIMS$$)}`)}*`)
+  // const HOST$ = subExp(`${IP_LITERAL$}|${IPV4ADDRESS$}(?!${REG_NAME$})` + `|${REG_NAME$}`)
+  // const PORT$ = subExp(`${DIGIT$$}*`)
+  // const AUTHORITY$ = subExp(`${subExp(`${USERINFO$}@`)}?${HOST$}${subExp(`\\:${PORT$}`)}?`)
+  // const PCHAR$ = subExp(`${PCT_ENCODED$}|${merge(UNRESERVED$$, SUB_DELIMS$$, '[\\:\\@]')}`)
+  // const SEGMENT$ = subExp(`${PCHAR$}*`)
+  // const SEGMENT_NZ$ = subExp(`${PCHAR$}+`)
+  // const SEGMENT_NZ_NC$ = subExp(`${subExp(`${PCT_ENCODED$}|${merge(UNRESERVED$$, SUB_DELIMS$$, '[\\@]')}`)}+`)
+  // const PATH_ABEMPTY$ = subExp(`${subExp(`\\/${SEGMENT$}`)}*`)
+  // const PATH_ABSOLUTE$ = subExp(`\\/${subExp(SEGMENT_NZ$ + PATH_ABEMPTY$)}?`) // simplified
+  // const PATH_NOSCHEME$ = subExp(SEGMENT_NZ_NC$ + PATH_ABEMPTY$) // simplified
+  // const PATH_ROOTLESS$ = subExp(SEGMENT_NZ$ + PATH_ABEMPTY$) // simplified
+  // const PATH_EMPTY$ = `(?!${PCHAR$})`
+  // const PATH$ = subExp(`${PATH_ABEMPTY$}|${PATH_ABSOLUTE$}|${PATH_NOSCHEME$}|${PATH_ROOTLESS$}|${PATH_EMPTY$}`)
+  // const QUERY$ = subExp(`${subExp(`${PCHAR$}|${merge('[\\/\\?]', IPRIVATE$$)}`)}*`)
+  // const FRAGMENT$ = subExp(`${subExp(`${PCHAR$}|[\\/\\?]`)}*`)
+  // const HIER_PART$ = subExp(`${subExp(`\\/\\/${AUTHORITY$}${PATH_ABEMPTY$}`)}|${PATH_ABSOLUTE$}|${PATH_ROOTLESS$}|${PATH_EMPTY$}`)
+  // const URI$ = subExp(`${SCHEME$}\\:${HIER_PART$}${subExp(`\\?${QUERY$}`)}?${subExp(`\\#${FRAGMENT$}`)}?`)
+  // const RELATIVE_PART$ = subExp(`${subExp(`\\/\\/${AUTHORITY$}${PATH_ABEMPTY$}`)}|${PATH_ABSOLUTE$}|${PATH_NOSCHEME$}|${PATH_EMPTY$}`)
+  // const RELATIVE$ = subExp(`${RELATIVE_PART$ + subExp(`\\?${QUERY$}`)}?${subExp(`\\#${FRAGMENT$}`)}?`)
+  // const URI_REFERENCE$ = subExp(`${URI$}|${RELATIVE$}`)
+  // const ABSOLUTE_URI$ = subExp(`${SCHEME$}\\:${HIER_PART$}${subExp(`\\?${QUERY$}`)}?`)
 
-  const GENERIC_REF$ = `^(${SCHEME$})\\:${subExp(`${subExp(`\\/\\/(${subExp(`(${USERINFO$})@`)}?(${HOST$})${subExp(`\\:(${PORT$})`)}?)`)}?(${PATH_ABEMPTY$}|${PATH_ABSOLUTE$}|${PATH_ROOTLESS$}|${PATH_EMPTY$})`)}${subExp(`\\?(${QUERY$})`)}?${subExp(`\\#(${FRAGMENT$})`)}?$`
-  const RELATIVE_REF$ = `^(){0}${subExp(`${subExp(`\\/\\/(${subExp(`(${USERINFO$})@`)}?(${HOST$})${subExp(`\\:(${PORT$})`)}?)`)}?(${PATH_ABEMPTY$}|${PATH_ABSOLUTE$}|${PATH_NOSCHEME$}|${PATH_EMPTY$})`)}${subExp(`\\?(${QUERY$})`)}?${subExp(`\\#(${FRAGMENT$})`)}?$`
-  const ABSOLUTE_REF$ = `^(${SCHEME$})\\:${subExp(`${subExp(`\\/\\/(${subExp(`(${USERINFO$})@`)}?(${HOST$})${subExp(`\\:(${PORT$})`)}?)`)}?(${PATH_ABEMPTY$}|${PATH_ABSOLUTE$}|${PATH_ROOTLESS$}|${PATH_EMPTY$})`)}${subExp(`\\?(${QUERY$})`)}?$`
-  const SAMEDOC_REF$ = `^${subExp(`\\#(${FRAGMENT$})`)}?$`
-  const AUTHORITY_REF$ = `^${subExp(`(${USERINFO$})@`)}?(${HOST$})${subExp(`\\:(${PORT$})`)}?$`
+  // const GENERIC_REF$ = `^(${SCHEME$})\\:${subExp(`${subExp(`\\/\\/(${subExp(`(${USERINFO$})@`)}?(${HOST$})${subExp(`\\:(${PORT$})`)}?)`)}?(${PATH_ABEMPTY$}|${PATH_ABSOLUTE$}|${PATH_ROOTLESS$}|${PATH_EMPTY$})`)}${subExp(`\\?(${QUERY$})`)}?${subExp(`\\#(${FRAGMENT$})`)}?$`
+  // const RELATIVE_REF$ = `^(){0}${subExp(`${subExp(`\\/\\/(${subExp(`(${USERINFO$})@`)}?(${HOST$})${subExp(`\\:(${PORT$})`)}?)`)}?(${PATH_ABEMPTY$}|${PATH_ABSOLUTE$}|${PATH_NOSCHEME$}|${PATH_EMPTY$})`)}${subExp(`\\?(${QUERY$})`)}?${subExp(`\\#(${FRAGMENT$})`)}?$`
+  // const ABSOLUTE_REF$ = `^(${SCHEME$})\\:${subExp(`${subExp(`\\/\\/(${subExp(`(${USERINFO$})@`)}?(${HOST$})${subExp(`\\:(${PORT$})`)}?)`)}?(${PATH_ABEMPTY$}|${PATH_ABSOLUTE$}|${PATH_ROOTLESS$}|${PATH_EMPTY$})`)}${subExp(`\\?(${QUERY$})`)}?$`
+  // const SAMEDOC_REF$ = `^${subExp(`\\#(${FRAGMENT$})`)}?$`
+  // const AUTHORITY_REF$ = `^${subExp(`(${USERINFO$})@`)}?(${HOST$})${subExp(`\\:(${PORT$})`)}?$`
 
   return {
     NOT_SCHEME: new RegExp(merge('[^]', ALPHA$$, DIGIT$$, '[\\+\\-\\.]'), 'g'),

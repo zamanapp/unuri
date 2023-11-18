@@ -1,5 +1,6 @@
 import { SCHEMES } from '../uri'
-import type { URIComponents, URIOptions, URISchemeHandler, pctEncChar } from '../uri'
+import type { URIComponents, URIOptions, URISchemeHandler } from '../uri'
+import { URN_PARSE } from './constants/urn'
 
 export interface URNComponents extends URIComponents {
   nid?: string
@@ -9,15 +10,6 @@ export interface URNComponents extends URIComponents {
 export interface URNOptions extends URIOptions {
   nid?: string
 }
-
-const NID$ = '(?:[0-9A-Za-z][0-9A-Za-z\\-]{1,31})'
-const PCT_ENCODED$ = '(?:\\%[0-9A-Fa-f]{2})'
-const TRANS$$ = '[0-9A-Za-z\\(\\)\\+\\,\\-\\.\\:\\=\\@\\;\\$\\_\\!\\*\\\'\\/\\?\\#]'
-const NSS$ = `(?:(?:${PCT_ENCODED$}|${TRANS$$})+)`
-const URN_SCHEME = new RegExp(`^urn\\:(${NID$})$`)
-const URN_PATH = new RegExp(`^(${NID$})\\:(${NSS$})$`)
-const URN_PARSE = /^([^\:]+)\:(.*)/
-const URN_EXCLUDED = /[\x00-\x20\\\"\&\<\>\[\]\^\`\{\|\}\~\x7F-\xFF]/g
 
 // RFC 2141
 export const handler: URISchemeHandler<URNComponents, URNOptions> = {
