@@ -113,6 +113,6 @@ jobs:
         uses: cycjimmy/semantic-release-action@v3
         with:
           branches: main
-          node-version: 18.x
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
