@@ -72,7 +72,7 @@ function decodeUnreserved(str: string): string {
   return (!decStr.match(UNRESERVED) ? str : decStr)
 }
 
-const handler: URISchemeHandler<MailtoComponents> = {
+export const handler: URISchemeHandler<MailtoComponents> = {
   scheme: 'mailto',
 
   parse(components: URIComponents, options: URIOptions): MailtoComponents {
@@ -185,5 +185,3 @@ const handler: URISchemeHandler<MailtoComponents> = {
     return components
   },
 }
-
-export default handler

@@ -10,7 +10,7 @@ const UUID = /^[0-9A-Fa-f]{8}(?:\-[0-9A-Fa-f]{4}){3}\-[0-9A-Fa-f]{12}$/
 const UUID_PARSE = /^[0-9A-Fa-f\-]{36}/
 
 // RFC 4122
-const handler: URISchemeHandler<UUIDComponents, URNOptions, URNComponents> = {
+export const handler: URISchemeHandler<UUIDComponents, URNOptions, URNComponents> = {
   scheme: 'urn:uuid',
 
   parse(urnComponents: UUIDComponents, options: URNOptions): UUIDComponents {
@@ -31,5 +31,3 @@ const handler: URISchemeHandler<UUIDComponents, URNOptions, URNComponents> = {
     return urnComponents
   },
 }
-
-export default handler

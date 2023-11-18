@@ -20,7 +20,7 @@ const URN_PARSE = /^([^\:]+)\:(.*)/
 const URN_EXCLUDED = /[\x00-\x20\\\"\&\<\>\[\]\^\`\{\|\}\~\x7F-\xFF]/g
 
 // RFC 2141
-const handler: URISchemeHandler<URNComponents, URNOptions> = {
+export const handler: URISchemeHandler<URNComponents, URNOptions> = {
   scheme: 'urn',
 
   parse(components: URNComponents, options: URNOptions): URNComponents {
@@ -64,5 +64,3 @@ const handler: URISchemeHandler<URNComponents, URNOptions> = {
     return uriComponents
   },
 }
-
-export default handler

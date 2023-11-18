@@ -6,7 +6,7 @@
 [![JSDocs][jsdocs-src]][jsdocs-href]
 <!-- [![License][license-src]][license-href] -->
 
-An [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986) compliant, scheme extendable URI parsing, validating and resolving library for both node and the browser.
+An [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986) compliant, scheme extendable URI parsing, serializing and resolving library for both node and the browser.
 
 > This project is a based of [uri-js](https://github.com/garycourt/uri-js) and aims to modernize it and extend it with new schemas/features.
 

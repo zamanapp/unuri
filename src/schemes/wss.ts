@@ -1,6 +1,6 @@
 import type { URISchemeHandler } from '../uri'
 import { URIComponents, URIOptions } from '../uri'
-import ws from './ws'
+import { handler as ws } from './ws'
 
 const handler: URISchemeHandler = {
   scheme: 'wss',

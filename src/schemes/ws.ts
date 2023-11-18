@@ -10,7 +10,7 @@ function isSecure(wsComponents: WSComponents): boolean {
 }
 
 // RFC 6455
-const handler: URISchemeHandler = {
+export const handler: URISchemeHandler = {
   scheme: 'ws',
 
   domainHost: true,
@@ -54,5 +54,3 @@ const handler: URISchemeHandler = {
     return wsComponents
   },
 }
-
-export default handler
