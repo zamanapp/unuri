@@ -9,7 +9,8 @@
 An [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986) compliant, scheme extendable URI parsing, validating and resolving library for both node and the browser.
 
 > This project is a based of [uri-js](https://github.com/garycourt/uri-js) and aims to modernize it and extend it with new schemas/features.
-> The project is meant to be used by [Zamical]() to parse and validate URIs in compliance with the ICalendar specifications in [RFC 5545](https://datatracker.ietf.org/doc/html/rfc5545) and [RFC 7986](https://datatracker.ietf.org/doc/html/rfc7986).
+
+> The project is meant to be used by [Zamical]() to parse and validate URIs in compliance with the ICalendar specifications in [RFC 5545](https://datatracker.ietf.org/doc/html/rfc5545)
 
 ## Features
 
@@ -44,33 +45,42 @@ npm install uri-ts
 
 ```typescript
 import * URI from 'uri-ts';
-import { parse, serialize, resolve, resolveComponents, normalize, equal, removeDotSegments, pctEncChar, pctDecChars, escapeComponent, unescapeComponent } from "uri-js";
+import { parse, serialize, resolve, resolveComponents, normalize, equal, removeDotSegments, pctEncChar, pctDecChars, escapeComponent, unescapeComponent } from "uri-ts";
 ```
 
 ## Parse
 
 ```typescript
-const uri = URI.parse('http://www.example.com:8080/path/to/resource?key=value#fragment');
+const uri = URI.parse('uri://user:pass@example.com:123/one/two.three?q1=a1&q2=a2#body');
+console.log({ uri }); // scheme: 'uri', userinfo: 'user:pass', host: 'example.com', port: 123, path: '/one/two.three', query: 'q1=a1&q2=a2', fragment: 'body', reference: 'uri' }
 ```
 
 ## Resolve
 
 ```typescript
-const uri = URI.resolve('http://www.example.com:8080/path/to/resource?key=value#fragment');
+const base = 'uri://a/b/c/d;p?q';
+const uri = URI.resolve(base, '../../g'); // uri://a/g
 ```
 
 ## Serialize
 
 ```typescript
-const uri = URI.parse('http://www.example.com:8080/path/to/resource?key=value#fragment');
-const serialized = uri.serialize();
+const toSerialize = {
+  scheme: 'uri',
+  userinfo: 'foo:bar',
+  host: 'example.com',
+  port: 1,
+  path: 'path',
+  query: 'query',
+  fragment: 'fragment',
+}
+uri.serialize(toSerialize); // uri://foo:bar@example.com:1/path?query#fragment
 ```
 
 ## Normalize
 
 ```typescript
-const uri = URI.parse('http://www.example.com:8080/path/to/resource?key=value#fragment');
-const normalized = uri.normalize();
+URI.normalize('//192.068.001.000'); // //192.68.1.0
 ```
 
 ## Extend
@@ -78,7 +88,17 @@ const normalized = uri.normalize();
 TODO
 
 
-## Possibly needed features
+## Roadmap
+The following feature will be added in the future. Any help is appreciated.
+
+- [x] port all tets to Vitest
+- [ ] refactor the code to be more modular and possibly tree-shakeable
+- [ ] turn the URI into a class
+- [ ] make parsing as static methods
+- [ ] create schema specific classes that extend the URI class
+- [ ] create schema detector
+- [ ] add validation functions
+- [ ] add parseSecure which will throw an error if the URI invalid
 
 The following schemas are not supported yet, but may be needed in the future. Any help is appreciated.
 
@@ -86,9 +106,6 @@ The following schemas are not supported yet, but may be needed in the future. An
 - [ ] Add support for `file` scheme
 - [ ] Add support for `data` scheme
 - [ ] Add support for `tel` scheme
-
-the following feature might be added
-- [ ] add validation function 
 
 ## License
 

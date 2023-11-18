@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { equal, escapeComponent, normalize, parse, resolve, serialize, unescapeComponent } from '../src'
 
-describe('uri specs', () => {
+describe('specs for URI', () => {
   describe('should parse properly', () => {
     it('should detect the scheme and path', () => {
       const component = parse('uri:')

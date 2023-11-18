@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { equal } from '../src'
 
-describe('http schema specs', () => {
+describe('specs for HTTP(S) schema ', () => {
   describe('should equate properly', () => {
     it('should equate http', () => {
       // test from RFC 2616

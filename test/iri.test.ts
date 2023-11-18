@@ -3,7 +3,7 @@ import { equal, normalize, parse, serialize } from '../src'
 
 const IRI_OPTION = { iri: true, unicodeSupport: true }
 
-describe('iri specs', () => {
+describe('specs for IRI', () => {
   it('should parse properly', () => {
     const components = parse('uri://us\xA0er:pa\uD7FFss@example.com:123/o\uF900ne/t\uFDCFwo.t\uFDF0hree?q1=a1\uF8FF\uE000&q2=a2#bo\uFFEFdy', IRI_OPTION)
     expect(components).toStrictEqual({

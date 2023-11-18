@@ -23,7 +23,7 @@ const URN_EXCLUDED = /[\x00-\x20\\\"\&\<\>\[\]\^\`\{\|\}\~\x7F-\xFF]/g
 const handler: URISchemeHandler<URNComponents, URNOptions> = {
   scheme: 'urn',
 
-  parse(components: URIComponents, options: URNOptions): URNComponents {
+  parse(components: URNComponents, options: URNOptions): URNComponents {
     const matches = components.path && components.path.match(URN_PARSE)
     let urnComponents = components as URNComponents
 

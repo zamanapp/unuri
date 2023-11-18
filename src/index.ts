@@ -4,15 +4,15 @@ import http from './schemes/http'
 
 import https from './schemes/https'
 
-import ws from './schemes/ws'
+import ws, { WSComponents } from './schemes/ws'
 
 import wss from './schemes/wss'
 
-import mailto from './schemes/mailto'
+import mailto, { MailtoComponents, MailtoHeaders } from './schemes/mailto'
 
-import urn from './schemes/urn'
+import urn, { URNComponents, URNOptions } from './schemes/urn'
 
-import uuid from './schemes/urn-uuid'
+import uuid, { UUIDComponents } from './schemes/urn-uuid'
 
 SCHEMES.http = http
 SCHEMES.https = https
@@ -23,4 +23,5 @@ SCHEMES.urn = urn
 
 SCHEMES.uuid = uuid
 
+export { URNComponents, UUIDComponents, URNOptions, MailtoComponents, MailtoHeaders, WSComponents }
 export * from './uri'
