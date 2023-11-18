@@ -1,5 +1,5 @@
 {
-  "name": "uri-ts",
+  "name": "unuri",
   "type": "module",
   "version": "0.0.0",
   "packageManager": "pnpm@8.10.5",
@@ -7,12 +7,12 @@
   "author": "Gimyboya",
   "license": "MIT",
   "funding": "https://github.com/sponsors/whiterocktech",
-  "homepage": "https://github.com/whiterocktech/uri-ts#readme",
+  "homepage": "https://github.com/whiterocktech/unuri#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/whiterocktech/uri-ts.git"
+    "url": "git+https://github.com/whiterocktech/unuri.git"
   },
-  "bugs": "https://github.com/whiterocktech/uri-ts/issues",
+  "bugs": "https://github.com/whiterocktech/unuri/issues",
   "keywords": [
     "URI",
     "IRI",

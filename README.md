@@ -1,4 +1,4 @@
-# uri-ts
+# unuri
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
@@ -37,15 +37,15 @@ An [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986) compliant, scheme e
 ## Install
 
 ```bash
-npm install uri-ts
+npm install unuri
 ```
 # Usage
 
 ## Import
 
 ```typescript
-import * URI from 'uri-ts';
-import { parse, serialize, resolve, resolveComponents, normalize, equal, removeDotSegments, pctEncChar, pctDecChars, escapeComponent, unescapeComponent } from "uri-ts";
+import * URI from 'unuri';
+import { parse, serialize, resolve, resolveComponents, normalize, equal, removeDotSegments, pctEncChar, pctDecChars, escapeComponent, unescapeComponent } from "unuri";
 ```
 
 ## Parse
@@ -159,13 +159,13 @@ SOFTWARE.
 
 <!-- Badges -->
 
-[npm-version-src]: https://img.shields.io/npm/v/uri-ts?style=flat&colorA=080f12&colorB=1fa669
-[npm-version-href]: https://npmjs.com/package/uri-ts
-[npm-downloads-src]: https://img.shields.io/npm/dm/uri-ts?style=flat&colorA=080f12&colorB=1fa669
-[npm-downloads-href]: https://npmjs.com/package/uri-ts
-[bundle-src]: https://img.shields.io/bundlephobia/minzip/uri-ts?style=flat&colorA=080f12&colorB=1fa669&label=minzip
-[bundle-href]: https://bundlephobia.com/result?p=uri-ts
-[license-src]: https://img.shields.io/github/license/whiterocktech/uri-ts.svg?style=flat&colorA=080f12&colorB=1fa669
-[license-href]: https://github.com/whiterocktech/uri-ts/blob/main/LICENSE
+[npm-version-src]: https://img.shields.io/npm/v/unuri?style=flat&colorA=080f12&colorB=1fa669
+[npm-version-href]: https://npmjs.com/package/unuri
+[npm-downloads-src]: https://img.shields.io/npm/dm/unuri?style=flat&colorA=080f12&colorB=1fa669
+[npm-downloads-href]: https://npmjs.com/package/unuri
+[bundle-src]: https://img.shields.io/bundlephobia/minzip/unuri?style=flat&colorA=080f12&colorB=1fa669&label=minzip
+[bundle-href]: https://bundlephobia.com/result?p=unuri
+[license-src]: https://img.shields.io/github/license/whiterocktech/unuri.svg?style=flat&colorA=080f12&colorB=1fa669
+[license-href]: https://github.com/whiterocktech/unuri/blob/main/LICENSE
 [jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-080f12?style=flat&colorA=080f12&colorB=1fa669
-[jsdocs-href]: https://www.jsdocs.io/package/uri-ts
+[jsdocs-href]: https://www.jsdocs.io/package/unuri
