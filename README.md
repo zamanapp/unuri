@@ -4,7 +4,7 @@
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![bundle][bundle-src]][bundle-href]
 [![JSDocs][jsdocs-src]][jsdocs-href]
-[![License][license-src]][license-href]
+<!-- [![License][license-src]][license-href] -->
 
 An [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986) compliant, scheme extendable URI parsing, validating and resolving library for both node and the browser.
 
