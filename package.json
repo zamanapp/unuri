@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "packageManager": "pnpm@8.10.5",
   "description": "Typescript library for managing URIs, ensuring they meet RFC 3986 standards. Features include parsing, validating, and normalizing URIs, with support for custom schemes.",
-  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "author": "Gimyboya",
   "license": "MIT",
   "funding": "https://github.com/sponsors/whiterocktech",
   "homepage": "https://github.com/whiterocktech/uri-ts#readme",

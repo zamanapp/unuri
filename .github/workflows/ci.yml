@@ -112,6 +112,7 @@ jobs:
       - name: Preparing a release 🚀
         uses: cycjimmy/semantic-release-action@v3
         with:
+          branches: main
           node-version: 18.x
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
