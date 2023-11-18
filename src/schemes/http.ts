@@ -5,7 +5,7 @@ const handler: URISchemeHandler = {
 
   domainHost: true,
 
-  parse(components: URIComponents, options: URIOptions): URIComponents {
+  parse(components: URIComponents, _: URIOptions): URIComponents {
     // report missing host
     if (!components.host)
       components.error = components.error || 'HTTP URIs must have a host.'
@@ -13,7 +13,7 @@ const handler: URISchemeHandler = {
     return components
   },
 
-  serialize(components: URIComponents, options: URIOptions): URIComponents {
+  serialize(components: URIComponents, _: URIOptions): URIComponents {
     const secure = String(components.scheme).toLowerCase() === 'https'
 
     // normalize the default port
