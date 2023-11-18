@@ -3,17 +3,40 @@
   "type": "module",
   "version": "0.0.0",
   "packageManager": "pnpm@8.10.5",
-  "description": "_description_",
+  "description": "Typescript library for managing URIs, ensuring they meet RFC 3986 standards. Features include parsing, validating, and normalizing URIs, with support for custom schemes.",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
-  "funding": "https://github.com/sponsors/antfu",
-  "homepage": "https://github.com/antfu/uri-ts#readme",
+  "funding": "https://github.com/sponsors/whiterocktech",
+  "homepage": "https://github.com/whiterocktech/uri-ts#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antfu/uri-ts.git"
+    "url": "git+https://github.com/whiterocktech/uri-ts.git"
   },
-  "bugs": "https://github.com/antfu/uri-ts/issues",
-  "keywords": [],
+  "bugs": "https://github.com/whiterocktech/uri-ts/issues",
+  "keywords": [
+    "URI",
+    "IRI",
+    "IDN",
+    "URN",
+    "UUID",
+    "HTTP",
+    "HTTPS",
+    "WS",
+    "WSS",
+    "MAILTO",
+    "RFC3986",
+    "RFC3987",
+    "RFC5891",
+    "RFC2616",
+    "RFC2818",
+    "RFC2141",
+    "RFC4122",
+    "RFC4291",
+    "RFC5952",
+    "RFC6068",
+    "RFC6455",
+    "RFC6874"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {
@@ -47,11 +70,15 @@
     "typecheck": "tsc --noEmit",
     "prepare": "simple-git-hooks"
   },
+  "dependencies": {
+    "punycode": "^2.3.1"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^1.2.1",
     "@antfu/ni": "^0.21.9",
     "@antfu/utils": "^0.7.6",
     "@types/node": "^20.9.1",
+    "@types/punycode": "^2.1.2",
     "bumpp": "^9.2.0",
     "eslint": "^8.53.0",
     "esno": "^4.0.0",

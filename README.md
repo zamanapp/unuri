@@ -6,7 +6,7 @@
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
 
-An [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986) compliant, scheme extendable URI parsing/validating/resolving library for both node and the browser.
+An [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986) compliant, scheme extendable URI parsing, validating and resolving library for both node and the browser.
 
 ## Features
 
@@ -35,6 +35,44 @@ An [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986) compliant, scheme e
 ```bash
 npm install uri-ts
 ```
+# Usage
+
+## Import
+
+```typescript
+import * URI from 'uri-ts';
+import { parse, serialize, resolve, resolveComponents, normalize, equal, removeDotSegments, pctEncChar, pctDecChars, escapeComponent, unescapeComponent } from "uri-js";
+```
+
+## Parse
+
+```typescript
+const uri = URI.parse('http://www.example.com:8080/path/to/resource?key=value#fragment');
+```
+
+## Resolve
+
+```typescript
+const uri = URI.resolve('http://www.example.com:8080/path/to/resource?key=value#fragment');
+```
+
+## Serialize
+
+```typescript
+const uri = URI.parse('http://www.example.com:8080/path/to/resource?key=value#fragment');
+const serialized = uri.serialize();
+```
+
+## Normalize
+
+```typescript
+const uri = URI.parse('http://www.example.com:8080/path/to/resource?key=value#fragment');
+const normalized = uri.normalize();
+```
+
+## Extend
+
+TODO
 
 
 ## Possibly needed features
