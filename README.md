@@ -92,7 +92,7 @@ TODO
 The following feature will be added in the future. Any help is appreciated.
 
 - [x] port all tets to Vitest
-- [ ] refactor the code to be more modular and possibly tree-shakeable
+- [x] refactor the code to be more modular and possibly tree-shakeable
 - [ ] turn the URI into a class
 - [ ] make parsing as static methods
 - [ ] create schema specific classes that extend the URI class
